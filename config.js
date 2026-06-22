@@ -6,14 +6,14 @@
 const CONFIG = {
   // 1) PAROLE — paroli, ar ko aizsargāt lapu.
   //    (The password guests must type to enter.)
-  password: "MAINI-MANI",
+  password: "klavini2026",
 
   // 2) SUPABASE — bezmaksas datu bāze, kas glabā rezervācijas.
   //    Atrodams: Supabase projekts → Project Settings → API.
   //    (Free database that stores who reserved what.
   //     Find these in your Supabase project → Project Settings → API.)
-  supabaseUrl: "https://AIZPILDI-MANI.supabase.co",
-  supabaseAnonKey: "AIZPILDI-MANI-anon-public-key",
+  supabaseUrl: "https://fcrllvygrghnjjfxfrlt.supabase.co",
+  supabaseAnonKey: "sb_publishable_Ap2S8DubCC5Xx-fzVjplVA_xBgUm13T",
 
   // 3) TEKSTI — virsraksti lapā. Droši maini! :)
   texts: {
