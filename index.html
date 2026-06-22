@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Mazuļa svētki · Vēlmju saraksts</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;700&family=Pacifico&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎀</text></svg>" />
+</head>
+<body>
+  <!-- Peldošās sirsniņas fonā -->
+  <div class="floaties" aria-hidden="true"></div>
+
+  <!-- ============ PAROLES EKRĀNS ============ -->
+  <section id="lock-screen" class="lock-screen">
+    <div class="lock-card">
+      <div class="lock-emoji">🎀</div>
+      <h1 class="lock-title">Mūsu mazās princeses<br />vēlmju saraksts</h1>
+      <p class="lock-sub">Šī lapa ir aizsargāta ar paroli 💕</p>
+      <form id="password-form" autocomplete="off">
+        <input
+          id="password-input"
+          type="password"
+          placeholder="Ievadi paroli"
+          aria-label="Parole"
+          required
+        />
+        <button type="submit">Ienākt ✨</button>
+      </form>
+      <p id="password-error" class="error" hidden>Nepareiza parole — mēģini vēlreiz 🙈</p>
+    </div>
+  </section>
+
+  <!-- ============ GALVENAIS SATURS ============ -->
+  <main id="app" class="app" hidden>
+    <header class="hero">
+      <div class="hero-emoji">🍼🎀👶</div>
+      <p class="eyebrow" id="eyebrow">Mazuļa svētki</p>
+      <h1 class="hero-title" id="hero-title">Vēlmju saraksts</h1>
+      <p class="hero-sub" id="hero-sub">Mēs gaidām meitenīti! 🎀</p>
+      <p class="hero-intro" id="hero-intro"></p>
+    </header>
+
+    <div id="status" class="status" hidden></div>
+
+    <section class="gifts" id="gift-grid" aria-live="polite"></section>
+
+    <footer class="footer">
+      <p>Paldies, ka esi daļa no mūsu prieka 💗</p>
+    </footer>
+  </main>
+
+  <!-- ============ REZERVĀCIJAS LOGS ============ -->
+  <div id="claim-modal" class="modal" hidden>
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close" aria-label="Aizvērt">×</button>
+      <div class="modal-emoji" id="modal-emoji">🎁</div>
+      <h2 id="modal-gift-name">Dāvana</h2>
+      <p class="modal-text">Lai citi viesi zinātu, ievadi savu vārdu — šī dāvana tiks atzīmēta kā rezervēta.</p>
+      <form id="claim-form" autocomplete="off">
+        <input id="claim-name" type="text" placeholder="Tavs vārds" aria-label="Tavs vārds" required maxlength="60" />
+        <button type="submit" id="claim-submit">Rezervēt dāvanu 💝</button>
+      </form>
+      <p id="claim-error" class="error" hidden></p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
