@@ -52,6 +52,12 @@ rezervāciju sākuma), `emoji`, `name`, `note` (apraksts), `link` (saite, neobli
 Visas rezervācijas redzamas Supabase: **Table Editor → reservations**. Ja vajag
 atcelt kādu rezervāciju, vienkārši izdzēs rindu tur.
 
+**Viesi paši var atcelt savu rezervāciju:** rezervējot, pārlūkā tiek saglabāts
+slepens tokens. Pie dāvanām, ko viesis rezervējis šajā pašā pārlūkā, parādās poga
+**“Atcelt manu rezervāciju”**. Atcelšana notiek caur datu bāzes funkciju
+`cancel_reservation`, kas pārbauda tokenu, tāpēc cita cilvēka rezervāciju atcelt
+nevar (pat ne caur API — tokens nav publiski nolasāms).
+
 ## 💻 Lokāla testēšana
 ```bash
 python3 -m http.server 8000

@@ -207,6 +207,16 @@ button:disabled { opacity: 0.6; cursor: default; transform: none; }
   align-self: flex-start;
 }
 .reserved-by { font-size: 13px; color: var(--rose-text); margin-top: 10px; font-weight: 500; }
+.cancel-btn {
+  margin-top: 12px;
+  background: #fff;
+  color: var(--rose-deep);
+  border: 2px solid var(--rose);
+  box-shadow: none;
+  font-size: 14px;
+  padding: 10px 16px;
+}
+.cancel-btn:hover { background: #fff0f6; box-shadow: var(--shadow-sm); }
 .ribbon {
   position: absolute;
   top: 14px;

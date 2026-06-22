@@ -30,6 +30,29 @@
   let reservations = {}; // gift_id -> name
   let activeGiftId = null;
   const SESSION_KEY = "bs_unlocked_v1";
+  const MY_RES_KEY = "bs_my_reservations_v1"; // gift_id -> slepenais tokens (šajā pārlūkā)
+
+  // ---- Manas rezervācijas (glabājas tikai šajā pārlūkā/ierīcē) ----
+  function getMyReservations() {
+    try { return JSON.parse(localStorage.getItem(MY_RES_KEY)) || {}; }
+    catch (_) { return {}; }
+  }
+  function rememberMyReservation(giftId, token) {
+    const mine = getMyReservations();
+    mine[giftId] = token;
+    try { localStorage.setItem(MY_RES_KEY, JSON.stringify(mine)); } catch (_) {}
+  }
+  function forgetMyReservation(giftId) {
+    const mine = getMyReservations();
+    delete mine[giftId];
+    try { localStorage.setItem(MY_RES_KEY, JSON.stringify(mine)); } catch (_) {}
+  }
+  function makeToken() {
+    try {
+      if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    } catch (_) {}
+    return "t-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2);
+  }
 
   // ---- Supabase savienojums ----
   function initSupabase() {
@@ -105,8 +128,10 @@
   // ---- Dāvanu attēlošana ----
   function renderGifts() {
     grid.innerHTML = "";
+    const mine = getMyReservations();
     (CONFIG.gifts || []).forEach((gift) => {
       const takenBy = reservations[gift.id];
+      const isMine = Boolean(takenBy && mine[gift.id]);
       const card = document.createElement("article");
       card.className = "gift-card" + (takenBy ? " reserved" : "");
 
@@ -116,6 +141,9 @@
           : "";
 
       if (takenBy) {
+        const cancelHtml = isMine
+          ? `<button type="button" class="cancel-btn" data-cancel="${escapeAttr(gift.id)}">Atcelt manu rezervāciju</button>`
+          : "";
         card.innerHTML = `
           <div class="ribbon">🎀</div>
           <div class="gift-emoji">${gift.emoji || "🎁"}</div>
@@ -124,7 +152,8 @@
           ${linkHtml}
           <div class="gift-action">
             <span class="reserved-badge">✔ Jau rezervēts</span>
-            <div class="reserved-by">Rūpējas: ${escapeHtml(takenBy)} 💕</div>
+            <div class="reserved-by">Rūpējas: ${escapeHtml(takenBy)}${isMine ? " (tu)" : ""} 💕</div>
+            ${cancelHtml}
           </div>`;
       } else {
         card.innerHTML = `
@@ -141,6 +170,9 @@
 
     grid.querySelectorAll("button[data-gift]").forEach((btn) => {
       btn.addEventListener("click", () => openModal(btn.getAttribute("data-gift")));
+    });
+    grid.querySelectorAll("button[data-cancel]").forEach((btn) => {
+      btn.addEventListener("click", () => cancelReservation(btn.getAttribute("data-cancel")));
     });
   }
 
@@ -178,9 +210,10 @@
     claimSubmit.disabled = true;
     claimError.hidden = true;
 
+    const token = makeToken();
     const { error } = await supabase
       .from("reservations")
-      .insert({ gift_id: activeGiftId, name: name });
+      .insert({ gift_id: activeGiftId, name: name, token: token });
 
     if (error) {
       // 23505 = unikālā ierobežojuma pārkāpums => kāds paspēja ātrāk
@@ -198,8 +231,43 @@
     }
 
     reservations[activeGiftId] = name;
+    rememberMyReservation(activeGiftId, token);
     closeModal();
     renderGifts();
+  }
+
+  // ---- Rezervācijas atcelšana (tikai pašu izveidoto) ----
+  async function cancelReservation(giftId) {
+    const token = getMyReservations()[giftId];
+    if (!token) return; // šo rezervāciju nav veicis šis pārlūks
+
+    const gift = (CONFIG.gifts || []).find((g) => g.id === giftId);
+    const label = gift ? gift.name : "šo dāvanu";
+    if (!window.confirm(`Vai tiešām atcelt rezervāciju “${label}”?`)) return;
+    if (!supabase) return;
+
+    const { data, error } = await supabase.rpc("cancel_reservation", {
+      p_gift_id: giftId,
+      p_token: token,
+    });
+
+    if (error) {
+      console.error(error);
+      alert("Neizdevās atcelt rezervāciju. Mēģini vēlreiz, lūdzu. 🙏");
+      return;
+    }
+
+    if (data === true) {
+      delete reservations[giftId];
+      forgetMyReservation(giftId);
+      renderGifts();
+    } else {
+      // Tokens nesakrīt — rezervācija droši vien jau ir atcelta vai mainīta.
+      forgetMyReservation(giftId);
+      await loadReservations();
+      renderGifts();
+      alert("Šo rezervāciju vairs nevar atcelt (tā jau ir mainīta).");
+    }
   }
 
   // ---- Palīgi (XSS aizsardzība) ----
