@@ -207,7 +207,7 @@ button:disabled { opacity: 0.6; cursor: default; transform: none; }
   align-self: flex-start;
 }
 .reserved-by { font-size: 13px; color: var(--rose-text); margin-top: 10px; font-weight: 500; }
-.cancel-btn {
+.gift-action .cancel-btn {
   margin-top: 12px;
   background: #fff;
   color: var(--rose-deep);
