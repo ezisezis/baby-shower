@@ -37,11 +37,10 @@ const CONFIG = {
     { id: "d01", emoji: "🛁", name: "Vanniņa", note: "",
       link: "https://www.ikea.com/lv/lv/p/laettsam-zidainu-vannina-balta-krasa-tirkizzila-krasa-10591573/" },
 
-    { id: "d02", emoji: "👕", name: "Bodiju komplekts (56. izm.)", note: "Der jebkurš no variantiem",
+    { id: "d02", emoji: "👕", name: "Bodiju komplekts (56. izm.)", note: "H&M · 5 gab. · der jebkurš variants",
       links: [
-        { label: "1. variants →", url: "https://www.next.com.lv/lv/style/su569371/an5397" },
-        { label: "2. variants →", url: "https://www.next.com.lv/lv/style/su567265/an5045" },
-        { label: "3. variants →", url: "https://www.next.com.lv/lv/style/su777885/h63241" },
+        { label: "1. variants →", url: "https://www2.hm.com/en_eur/productpage.0814306075.html" },
+        { label: "2. variants →", url: "https://www2.hm.com/en_eur/productpage.0814306072.html" },
       ] },
 
     { id: "d03", emoji: "👕", name: "Bodiju komplekts (62. izm.)", note: "",
@@ -49,9 +48,6 @@ const CONFIG = {
 
     { id: "d04", emoji: "🧢", name: "Cepurītes", note: "50–62 cm",
       link: "https://www.next.com.lv/lv/style/su569013/ay7912" },
-
-    { id: "d05", emoji: "🧷", name: "Priekšautiņi", note: "",
-      link: "https://www.next.com.lv/lv/style/su607039/f17050" },
 
     { id: "d06", emoji: "👗", name: "Komplektiņš (62. izm.)", note: "",
       link: "https://www.next.com.lv/lv/style/su741184/h44313" },
@@ -94,9 +90,6 @@ const CONFIG = {
 
     { id: "d19", emoji: "🪀", name: "Spēļmantiņa", note: "",
       link: "https://littleandcute.lv/products/uid-4976010" },
-
-    { id: "d20", emoji: "🐑", name: "Graužamā rotaļlieta", note: "Farm (aitiņa / gotiņa)",
-      link: "https://www.starduststore.lv/Grauzammantas-Farm-SHEEP-COW" },
 
     { id: "d21", emoji: "🐰", name: "Moonie zaķis", note: "Miega draugs ar naktslampiņu",
       link: "https://www.9months.lv/moonie-bunny-cream" },
