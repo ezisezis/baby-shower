@@ -90,7 +90,9 @@
   function applyTexts() {
     const t = CONFIG.texts || {};
     if (t.eventTitle) document.getElementById("eyebrow").textContent = t.eventTitle;
-    if (t.subtitle) document.getElementById("hero-sub").textContent = t.subtitle;
+    const subEl = document.getElementById("hero-sub");
+    if (t.subtitle) subEl.textContent = t.subtitle;
+    else subEl.hidden = true;
     if (t.intro) document.getElementById("hero-intro").textContent = t.intro;
   }
 

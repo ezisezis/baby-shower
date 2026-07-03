@@ -19,11 +19,12 @@ const CONFIG = {
   texts: {
     // Mazās meitenītes vārds (ja vēl nav vārda, atstāj kā "mūsu meitenīte")
     babyName: "mūsu meitenīte",
-    eventTitle: "Mazuļa svētki",
-    subtitle: "Mēs gaidām meitenīti! 🎀",
+    eventTitle: "Princeses svētki",
+    subtitle: "",
     intro:
-      "Esam sagatavojuši nelielu vēlmju sarakstu. Ja vēlies mūs iepriecināt ar dāvanu, " +
-      "izvēlies kādu no sarakstā un rezervē to, lai citi viesi zinātu, ka tā jau ir izvēlēta. " +
+      "Esam sagatavojuši nelielu vēlmju sarakstu — tikai kā ideju palīgu. " +
+      "Dāvana nav obligāta! Ja tomēr vēlies mūs iepriecināt, izvēlies kaut ko no saraksta " +
+      "un rezervē to, lai citi viesi zina, ka tā jau ir izvēlēta. " +
       "Bet vissvarīgākā dāvana mums esi tu — paldies, ka esi kopā ar mums! 💕",
   },
 
