@@ -115,7 +115,8 @@
       );
       return;
     }
-    const { data, error } = await supabase.from("reservations").select("gift_id, name");
+    // Ielasām tikai gift_id — vārdus (kas rezervēja) citiem viesiem nerādām.
+    const { data, error } = await supabase.from("reservations").select("gift_id");
     if (error) {
       console.error(error);
       showStatus("Neizdevās ielādēt rezervācijas. Pārlādē lapu, lūdzu. 🙏");
@@ -123,7 +124,7 @@
     }
     hideStatus();
     (data || []).forEach((row) => {
-      reservations[row.gift_id] = row.name;
+      reservations[row.gift_id] = true;
     });
   }
 
@@ -132,16 +133,19 @@
     grid.innerHTML = "";
     const mine = getMyReservations();
     (CONFIG.gifts || []).forEach((gift) => {
-      const takenBy = reservations[gift.id];
-      const isMine = Boolean(takenBy && mine[gift.id]);
+      const isReserved = Boolean(reservations[gift.id]);
+      const isMine = Boolean(isReserved && mine[gift.id]);
       const card = document.createElement("article");
-      card.className = "gift-card" + (takenBy ? " reserved" : "");
+      card.className = "gift-card" + (isReserved ? " reserved" : "");
 
       const linkHtml = buildLinksHtml(gift);
 
-      if (takenBy) {
-        const cancelHtml = isMine
-          ? `<button type="button" class="cancel-btn" data-cancel="${escapeAttr(gift.id)}">Atcelt manu rezervāciju</button>`
+      if (isReserved) {
+        // Citiem viesiem rādām tikai "Jau rezervēts". Tikai pats rezervētājs
+        // redz, ka tā ir viņa rezervācija, un var to atcelt.
+        const mineHtml = isMine
+          ? `<div class="reserved-by">Tu to rezervēji 💕</div>
+            <button type="button" class="cancel-btn" data-cancel="${escapeAttr(gift.id)}">Atcelt manu rezervāciju</button>`
           : "";
         card.innerHTML = `
           <div class="ribbon">🎀</div>
@@ -151,8 +155,7 @@
           ${linkHtml}
           <div class="gift-action">
             <span class="reserved-badge">✔ Jau rezervēts</span>
-            <div class="reserved-by">Rūpējas: ${escapeHtml(takenBy)}${isMine ? " (tu)" : ""} 💕</div>
-            ${cancelHtml}
+            ${mineHtml}
           </div>`;
       } else {
         card.innerHTML = `
