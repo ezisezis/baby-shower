@@ -135,10 +135,7 @@
       const card = document.createElement("article");
       card.className = "gift-card" + (takenBy ? " reserved" : "");
 
-      const linkHtml =
-        gift.link && gift.link.trim()
-          ? `<a class="gift-link" href="${escapeAttr(gift.link)}" target="_blank" rel="noopener">Apskatīt veikalā →</a>`
-          : "";
+      const linkHtml = buildLinksHtml(gift);
 
       if (takenBy) {
         const cancelHtml = isMine
@@ -268,6 +265,24 @@
       renderGifts();
       alert("Šo rezervāciju vairs nevar atcelt (tā jau ir mainīta).");
     }
+  }
+
+  // ---- Saišu veidošana (viena vai vairākas saites uz veikalu) ----
+  function buildLinksHtml(gift) {
+    let items = [];
+    if (Array.isArray(gift.links)) {
+      items = gift.links.filter((l) => l && l.url);
+    } else if (gift.link && String(gift.link).trim()) {
+      items = [{ label: "Apskatīt veikalā →", url: gift.link }];
+    }
+    if (!items.length) return "";
+    const inner = items
+      .map(
+        (l) =>
+          `<a class="gift-link" href="${escapeAttr(l.url)}" target="_blank" rel="noopener">${escapeHtml(l.label || "Apskatīt veikalā →")}</a>`
+      )
+      .join("");
+    return `<div class="gift-links">${inner}</div>`;
   }
 
   // ---- Palīgi (XSS aizsardzība) ----
