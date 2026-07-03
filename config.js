@@ -104,5 +104,8 @@ const CONFIG = {
 
     { id: "d24", emoji: "🧩", name: "Aktivitāšu paklājs", note: "Little Dutch, okeāns (rozā)",
       link: "https://ecoemi.lv/produkti/rotallietas/little-dutch/5/2699/aktivitasu-paklajs---okeana-roza" },
+
+    { id: "d25", emoji: "🦷", name: "Silikona zobgrauzis", note: "TinyNord, lavandas rozā",
+      link: "https://www.nordbaby.com/lv/lv/rotallietas/zobu-rinki-un-grabulisi/tinynord-silikona-zobgrauzis-lavender-pink_136657" },
   ],
 };
