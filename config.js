@@ -22,9 +22,10 @@ const CONFIG = {
     eventTitle: "Princeses svētki",
     subtitle: "",
     intro:
-      "Esam sagatavojuši nelielu vēlmju sarakstu — tikai kā ideju palīgu. " +
-      "Dāvana nav obligāta! Ja tomēr vēlies mūs iepriecināt, izvēlies kaut ko no saraksta " +
-      "un rezervē to, lai citi viesi zina, ka tā jau ir izvēlēta. " +
+      "Esam sagatavojuši nelielu vēlmju sarakstu. Dāvana nav obligāta! " +
+      "Ja tomēr vēlies mūs iepriecināt, izvēlies kaut ko no saraksta un rezervē to, " +
+      "lai citi viesi zina, ka tā jau ir izvēlēta. Ja nekas no saraksta neuzrunā, " +
+      "var izvēlēties arī savu variantu, kas šķiet atbilstošs.\n" +
       "Bet vissvarīgākā dāvana mums esi tu — paldies, ka esi kopā ar mums! 💕",
   },
 

@@ -144,6 +144,7 @@ button:disabled { opacity: 0.6; cursor: default; transform: none; }
   color: var(--ink-soft);
   line-height: 1.7;
   font-size: 15px;
+  white-space: pre-line;
 }
 
 /* ---------- Statusa josla ---------- */
