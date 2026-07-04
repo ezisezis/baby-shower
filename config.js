@@ -107,5 +107,8 @@ const CONFIG = {
 
     { id: "d25", emoji: "🦷", name: "Silikona zobgrauzis", note: "TinyNord, lavandas rozā",
       link: "https://www.nordbaby.com/lv/lv/rotallietas/zobu-rinki-un-grabulisi/tinynord-silikona-zobgrauzis-lavender-pink_136657" },
+
+    { id: "d26", emoji: "👕", name: "Bodiji ar rāvējslēdzēju (56. izm.)", note: "Next",
+      link: "https://www.next.com.lv/en/style/su993095/v45930" },
   ],
 };
